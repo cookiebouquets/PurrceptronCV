@@ -17,10 +17,7 @@ while True:
     if not ret:
         break
 
-
-    if frame_num % 5 == 0:
-        cv2.imwrite(f"{save_dir}/frame_{frame_num:05d}.jpg", frame)
-    
+    cv2.imwrite(f"{save_dir}/frame_{frame_num:05d}.jpg", frame)
     frame_num += 1
 
 cap.release()
