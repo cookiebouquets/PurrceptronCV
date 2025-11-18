@@ -6,10 +6,10 @@ save_dir = r"..\frames\empty"
 
 os.makedirs(save_dir,exist_ok=True)
 
-
 cap = cv2.VideoCapture(path)
 frame_num = 0
 print("Opened:", cap.isOpened())
+
 
 
 while True:
