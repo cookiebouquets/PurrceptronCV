@@ -1,8 +1,8 @@
 import cv2
 import os
 
-path = "IMG_2526.mov"
-save_dir = r"..\frames\empty"
+path = "IMG_2555.mov"
+save_dir = r"..\frames\full"
 
 os.makedirs(save_dir,exist_ok=True)
 
@@ -17,7 +17,7 @@ while True:
     if not ret:
         break
 
-    cv2.imwrite(f"{save_dir}/frame_{frame_num:05d}.jpg", frame)
+    cv2.imwrite(f"{save_dir}/2frame_{frame_num:05d}.jpg", frame)
     frame_num += 1
 
 cap.release()
