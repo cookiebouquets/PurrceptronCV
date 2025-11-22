@@ -1,5 +1,5 @@
 import sensor, time, ml
-from machine import LED,UART
+from machine import LED,UART, Pin
 sensor.reset()
 sensor.set_pixformat(sensor.RGB565)
 sensor.set_framesize(sensor.QQVGA)
@@ -8,23 +8,24 @@ sensor.skip_frames(time=2000)
 
 model = ml.Model("catbowl.tflite")
 led = LED("LED_BLUE")
-ledG = LED("LED_GREEN")
 clock = time.clock()
 
+"uart = UART('LP1', 115200)"
 
-uart = UART("LP1", baudrate=9600,timeout_char = 1000)
+
+
+uart = UART("LP1", baudrate=9600,timeout_char = 10000)
 
 while True:
+    
     clock.tick()
     img = sensor.snapshot()
     pred = model.predict([img])[0][0]
     print("Pred:", pred[0], "FPS:", clock.fps())
+    uart.write("hi \n")
     if pred[0] > 0.5:
-        ledG.off()
         led.on()
-        uart.write("1\n")
-    if pred[0] < 0.50:
+    if pred[0] < 0.5:
         led.off()
-        ledG.on()
-        uart.write("0\n")
+
     time.sleep(1)
