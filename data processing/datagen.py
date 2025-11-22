@@ -1,8 +1,8 @@
 import cv2
 import os
 
-path = "IMG_2555.mov"
-save_dir = r"..\frames\full"
+path = "IMG_2603.mov"
+save_dir = r"..\frames\empty"
 
 os.makedirs(save_dir,exist_ok=True)
 
