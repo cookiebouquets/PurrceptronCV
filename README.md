@@ -15,7 +15,7 @@ Before specifying and training our model, we then augment our dataset for genera
 
 In this section, we train our neural network. Our network is a simplified CNN with max pooling interspersed. Each convolutional layer extracts features from the image (texture/color of food present), then downsamples these feature maps using max pooling to prevent overfitting. We then use global average pooling to reduce the size of the tensor. Finally, we use two dense layers with a sigmoid activation function in order to produce probabilities for our binary classification. We make the global average pooling -> dense layer approach rather than a flatten approach because this model has stringent parameter bounds due to the microcontroller's limited RAM. See the diagram below for a visualizaiton of the model:
 
-<img src="https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/model.png" width="48">
+<img src="https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/model.png" width="200">
 
 ## 4. Hardware Programming 
 
