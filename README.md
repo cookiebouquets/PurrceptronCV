@@ -7,9 +7,9 @@ An issue busy pet owners might face is refilling their pet's food bowl, especial
 
 ## 2. Data Collection and Preprocessing
 
-We needed to collect a ton of data to train our neural network. In order to do this, we recorded a bunch of 10-20 second clips of our food bowl entirely in entwo binary states: "full" and "empty". Then, we wrote a python script (([datagen.py](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/datagen.py)) that iterates through a specified video frame by frame and save each frame into a directory called Raws. After that, we split the data set into a 70/20/10 split of Train/Validation/Test sets based on the whether the frame is full or empty [split.py](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/split.py). These files are thrn moved into a specific directory called data with subdirectories for the train set, validation set, and test set. This directory structure is required for Keras/Tensorflow.
+We needed to collect a ton of data to train our neural network. In order to do this, we recorded a bunch of 10-20 second clips of our food bowl entirely in entwo binary states: "full" and "empty". Then, we wrote a python script [(datagen.py)](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/datagen.py) that iterates through a specified video frame by frame and save each frame into a directory called Raws. After that, we split the data set into a 70/20/10 split of Train/Validation/Test sets based on the whether the frame is full or empty [(split.py)](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/split.py). These files are thrn moved into a specific directory called data with subdirectories for the train set, validation set, and test set. This directory structure is required for Keras/Tensorflow.
 
-Before specifying and training our model, we then augment our dataset for generalizability's sake. We randomly jitter the zoom, rotation, brightness, and contrast of the train/validation/test set so that our model can learn the different binary states in various conditions. See [cell 2](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/catclassifier.ipynb). 
+Before specifying and training our model, we then augment our dataset for generalizability's sake. We randomly jitter the zoom, rotation, brightness, and contrast of the train/validation/test set so that our model can learn the different binary states in various conditions. See [(cell 2)](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/catclassifier.ipynb). 
 
 ## 3. Model Creation and Compression
 
@@ -21,7 +21,7 @@ We then use TFLite for its int8 quantization abilities. This allows us to get th
 
 ## 4. Hardware Programming 
 
-In this section, we demonstrate our MicroPython code that runs on our nicla vision [main.py](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/main.py). In our setup, we establish a UART serial connection with a baud rate of 9600. In our MicroPython code, we tune our threshold. We only want the servo arm to open when the model is confident that the bowl is empty. Our model makes a prediction, then writes 1 for open and 0 for close over UART. 
+In this section, we demonstrate our MicroPython code that runs on our nicla vision [(main.py)](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/main.py). In our setup, we establish a UART serial connection with a baud rate of 9600. In our MicroPython code, we tune our threshold. We only want the servo arm to open when the model is confident that the bowl is empty. Our model makes a prediction, then writes 1 for open and 0 for close over UART. 
 
 ## 5. Building the Dispenser
 
