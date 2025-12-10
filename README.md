@@ -15,10 +15,12 @@ Before specifying and training our model, we then augment our dataset for genera
 
 In this section, we train our neural network. Our network is a simplified CNN with max pooling interspersed. Each convolutional layer extracts features from the image (texture/color of food present), then downsamples these feature maps using max pooling to prevent overfitting. We then use global average pooling to reduce the size of the tensor. Finally, we use two dense layers with a sigmoid activation function in order to produce probabilities for our binary classification. We make the global average pooling -> dense layer approach rather than a flatten approach because this model has stringent parameter bounds due to the microcontroller's limited RAM. See the diagram below for a visualizaiton of the model:
 
-<img src="https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/model.png" width="700">
+<p align = "center"><img src="https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/model.png" width="700"></p>
+
+We then use TFLite for its int8 quantization abilities. This allows us to get the model to a shocking 28.3 kb.
 
 ## 4. Hardware Programming 
 
-
+In this section, we demonstrate our MicroPython code that runs on our nicla vision [main.py](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/main.py). In our setup, we establish a UART serial connection with a baud rate of 9600. In our MicroPython code, we tune our threshold. We only want the servo arm to open when the model is confident that the bowl is empty. Our model makes a prediction, then writes 1 for open and 0 for close over UART. 
 
 ## 5. Building the Dispenser
