@@ -7,8 +7,18 @@ An issue busy pet owners might face is refilling their pet's food bowl, especial
 
 ## 2. Data Collection and Preprocessing
 
+We needed to collect a ton of data to train our neural network. In order to do this, we recorded a bunch of 10-20 second clips of our food bowl entirely in entwo binary states: "full" and "empty". Then, we wrote a python script (([datagen.py](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/datagen.py)) that iterates through a specified video frame by frame and save each frame into a directory called Raws. After that, we split the data set into a 70/20/10 split of Train/Validation/Test sets based on the whether the frame is full or empty [split.py](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/split.py). These files are thrn moved into a specific directory called data with subdirectories for the train set, validation set, and test set. This directory structure is required for Keras/Tensorflow.
+
+Before specifying and training our model, we then augment our dataset for generalizability's sake. We randomly jitter the zoom, rotation, brightness, and contrast of the train/validation/test set so that our model can learn the different binary states in various conditions. See [cell 2](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/catclassifier.ipynb). 
+
 ## 3. Model Creation and Compression
 
+In this section, we train our neural network. Our network is a simplified CNN with max pooling interspersed. Each convolutional layer extracts features from the image (texture/color of food present), then downsamples these feature maps using max pooling to prevent overfitting. We then use global average pooling to reduce the size of the tensor. Finally, we use two dense layers with a sigmoid activation function in order to produce probabilities for our binary classification. We make the global average pooling -> dense layer approach rather than a flatten approach because this model has stringent parameter bounds due to the microcontroller's limited RAM. See the diagram below for a visualizaiton of the model:
+
+![Model Diagram](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/model.png)
+
 ## 4. Hardware Programming 
+
+
 
 ## 5. Building the Dispenser
