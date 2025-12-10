@@ -24,3 +24,5 @@ We then use TFLite for its int8 quantization abilities. This allows us to get th
 In this section, we demonstrate our MicroPython code that runs on our nicla vision [main.py](https://github.com/cookiebouquets/PurrceptronCV/blob/main/model/main.py). In our setup, we establish a UART serial connection with a baud rate of 9600. In our MicroPython code, we tune our threshold. We only want the servo arm to open when the model is confident that the bowl is empty. Our model makes a prediction, then writes 1 for open and 0 for close over UART. 
 
 ## 5. Building the Dispenser
+
+## 6. Demonstration 
