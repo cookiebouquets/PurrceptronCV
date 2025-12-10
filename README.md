@@ -14,7 +14,9 @@ PurrceptronCV/
  ├── model/
  │    ├── catclassifier.ipynb
  │    ├── main.py
- │    └── model.tflite
+ │    ├── model.tflite
+ │    └── servocode/           
+ │         └── servocode.ino
  └── README.md
 ```
 
