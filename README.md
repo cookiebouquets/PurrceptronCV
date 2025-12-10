@@ -5,6 +5,21 @@ PurrceptronCV is a tiny ML project designed to automatically fill a pet's food b
 
 An issue busy pet owners might face is refilling their pet's food bowl, especially on days where the owner may be away for an extended period of time for vacation or work trips. In this project, we introduce PurrceptronCV, a **TinyML** project that utilizes a C**onvolutional Neural Network (CNN)** to detect when a pet's food bowl is empty. This model sends its predictions to an **Arduino UNO**, a microcontroller, in order to activate a servo motor connected to a rack and pinion system in order to dispense the food into the bowl. Detection is done via a **Nicla Vision**, a microcontroller with a built-in camera and the capability of running **MicroPython** programs. Considerations have to be made about the amount of parameters for our model, as the nicla vision's onboard memory is limited. We use **TFLite** to compress our model so that it fits within the limitations of the Nicla Vision. The dispenser itself is built with the **GoBilda robotics build system**
 
+### 1.5 Project Structure 
+
+PurrceptronCV/
+ ├── data_processing/
+ │    ├── datagen.py
+ │    └── split.py
+ ├── model/
+ │    ├── catclassifier.ipynb
+ │    ├── main.py
+ │    └── model.tflite
+ ├── hardware/
+ │    └── wiring_diagram.png
+ └── README.md
+
+
 ## 2. Data Collection and Preprocessing
 
 We needed to collect a ton of data to train our neural network. In order to do this, we recorded a bunch of 10-20 second clips of our food bowl entirely in two binary states: "full" and "empty". Then, we wrote a python script [(datagen.py)](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/datagen.py) that iterates through a specified video frame by frame and save each frame into a directory called Raws. After that, we split the data set into a 70/20/10 split of Train/Validation/Test sets based on the whether the frame is full or empty [(split.py)](https://github.com/cookiebouquets/PurrceptronCV/blob/main/data%20processing/split.py). These files are then moved into a specific directory called data with subdirectories for the train set, validation set, and test set. This directory structure is required for Keras/Tensorflow.
